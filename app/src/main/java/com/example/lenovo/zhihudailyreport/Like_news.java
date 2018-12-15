@@ -161,12 +161,6 @@ public class Like_news extends AppCompatActivity {
         }
     }
     //下拉刷新
-    private void initData(){
-        News news = new News();
-        news.setTitle(title);
-        news.setBitmap(bitmap);
-        NewsList.add(news);
-    }
     private void refreshNews(){
         new Thread(new Runnable() {
             @Override

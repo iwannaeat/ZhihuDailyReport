@@ -169,6 +169,16 @@ public class ShowColumn extends AppCompatActivity {
                             startActivity(intent);
                         }
                         break;
+                    case R.id.column:
+                        if(userName == null){
+                            Toast.makeText(ShowColumn.this, "您还没有登录~请点击头像登录", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Intent intent = new Intent(ShowColumn.this, Like_column.class);
+                            intent.putExtra("userName",userName);
+                            startActivity(intent);
+                        }
+                        break;
                     case R.id.change_password:
                         if(userName == null){
                             Toast.makeText(ShowColumn.this, "您还没有登录~请点击头像登录", Toast.LENGTH_SHORT).show();

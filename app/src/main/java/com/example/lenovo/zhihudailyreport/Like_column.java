@@ -15,9 +15,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.example.lenovo.zhihudailyreport.Adapter.ColumnAdapter;
-import com.example.lenovo.zhihudailyreport.Adapter.NewsAdapter;
 import com.example.lenovo.zhihudailyreport.Bean.Column;
-import com.example.lenovo.zhihudailyreport.Bean.News;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,11 +39,12 @@ public class Like_column extends AppCompatActivity {
     String title;
     String picURL;
     String userName;
+    String content;
     private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.like_news);
+        setContentView(R.layout.like_column);
         context = this;
         Intent intent = getIntent();
         userName = intent.getStringExtra("userName");
@@ -60,11 +59,6 @@ public class Like_column extends AppCompatActivity {
             }
         });
         sendRequestWithHttpURLConnection();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        ColumnAdapter columnAdapter = new ColumnAdapter(columnList,userName);
-        recyclerView.setAdapter(columnAdapter);
     }
     private void sendRequestWithHttpURLConnection(){
         new Thread(new Runnable() {
@@ -136,6 +130,7 @@ public class Like_column extends AppCompatActivity {
                 title = jsonObject1.getString("name");
                 picURL = jsonObject1.getString("thumbnail");
                 columnId = jsonObject1.getInt("id");
+                content = jsonObject1.getString("description");
                 bitmap = getHttpBitmap(picURL);
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 Cursor cursor = db.query("Colum", new String[]{"userName", "columnId"}, "userName=?", new String[]{userName}, null, null, null);
@@ -153,6 +148,7 @@ public class Like_column extends AppCompatActivity {
                     column.setTitle(title);
                     column.setBitmap(bitmap);
                     column.setColumnId(columnId);
+                    column.setContent(content);
                     columnList.add(column);
                     flag = 0;
                 }
@@ -163,12 +159,6 @@ public class Like_column extends AppCompatActivity {
         }
     }
     //下拉刷新
-    private void initData(){
-        Column column = new Column();
-        column.setTitle(title);
-        column.setBitmap(bitmap);
-        columnList.add(column);
-    }
     private void refreshNews(){
         new Thread(new Runnable() {
             @Override

@@ -22,7 +22,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             + "userName text)";
     private static final String CREATE_COLUM= "create table Colum ("
             + "id integer primary key autoincrement, "
-            + "columnId text,"
+            + "columnId integer,"
             + "userName text)";
     private Context mContext;
 
