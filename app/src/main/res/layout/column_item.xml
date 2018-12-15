@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:id="@+id/iv_column"
             android:layout_gravity="center"/>
         <TextView
